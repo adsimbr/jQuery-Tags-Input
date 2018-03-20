@@ -181,7 +181,10 @@
       minChars:0,
       width:'300px',
       height:'100px',
-      autocomplete: {selectFirst: false },
+      autocomplete: {
+      	selectFirst: false, 
+      	searchWhenClick: false
+      },
       hide:true,
       delimiter: ',',
       unique:true,
@@ -189,7 +192,7 @@
       placeholderColor:'#666666',
       autosize: true,
       comfortZone: 20,
-      inputPadding: 6*2
+      inputPadding: 6*2,      
     },options);
 
     	var uniqueIdCounter = 0;
@@ -275,7 +278,12 @@
 							}
 					  	});
 					} else if (jQuery.ui.autocomplete !== undefined) {
-						$(data.fake_input).autocomplete(autocomplete_options);
+						if(settings.autocomplete && settings.autocomplete.searchWhenClick !== undefined && settings.autocomplete.searchWhenClick){
+							$(data.fake_input).autocomplete(autocomplete_options).on("click", function(){$(this).autocomplete("search","%")});	
+						} else {
+							$(data.fake_input).autocomplete(autocomplete_options);
+						}
+						
 						$(data.fake_input).bind('autocompleteselect',data,function(event,ui) {
 							$(event.data.real_input).addTag(ui.item.value,{focus:true,unique:(settings.unique)});
 							return false;
