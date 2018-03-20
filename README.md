@@ -44,10 +44,16 @@ autocomplete url.
 If you're using the bassistance jQuery.autocomplete, which takes extra
 parameters, you can also send in options to the autocomplete plugin, as
 described here.
+searchWhenClick: Boolean - When true search on click by parameter %
 
 	$('#tags').tagsInput({
 	  autocomplete_url:'http://myserver.com/api/autocomplete',
-	  autocomplete:{selectFirst:true,width:'100px',autoFill:true}
+	  autocomplete:{
+	  	selectFirst:true,
+		width:'100px',
+		autoFill:true,
+		searchWhenClick: false
+	  }
 	});
 
 You can add and remove tags by calling the addTag() and removeTag() functions.
